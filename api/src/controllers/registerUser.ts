@@ -26,8 +26,8 @@ export function registerUser(req: Request, res: Response) {
   // validate request
   try {
     registerSchema.parse({ email, password });
-  } catch (e) {
-    return res.status(400).json({ error: "Invalid request" });
+  } catch (e: any) {
+    return res.status(400).json({ error: e.message });
   }
 
   // TODO: check if email is already in use

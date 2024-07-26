@@ -1,7 +1,9 @@
 import Database from "better-sqlite3";
 import bodyParser from "body-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
+import morgan from "morgan";
 import { initDb } from "./dbInit";
 import authenticateUser from "./middlewares/authenticate";
 import authRouter from "./routes/auth";
@@ -20,6 +22,8 @@ db.pragma("journal_mode = WAL");
 app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(morgan("dev"));
 
 app.use("/auth", authRouter);
 
