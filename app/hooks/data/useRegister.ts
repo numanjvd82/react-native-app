@@ -9,7 +9,7 @@ type RegisterUser = {
 
 const registerUser = async ({ email, password }: RegisterUser) => {
   try {
-    const response = await axiosClient.post("/auth123/register", {
+    const response = await axiosClient.post("/auth/register", {
       email,
       password,
     });
