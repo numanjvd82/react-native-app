@@ -1,4 +1,5 @@
 import { Stack, useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -16,43 +17,59 @@ const Routes = [
   {
     name: "auth/sign-up",
     options: {
-      headerTitle: "Sign Up",
+      headerShown: false,
     },
   },
   {
     name: "auth/sign-in",
     options: {
-      headerTitle: "Sign In",
+      headerShown: false,
     },
   },
   {
     name: "home",
     options: {
-      headerTitle: "Home",
+      headerTitle: "",
     },
   },
 ];
 
 function Layout() {
-  const { authState, onLogout } = useAuth();
+  const { authState } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (!authState?.authenticated) {
       router.replace("/");
+    } else {
+      router.replace("/home");
     }
   }, [authState?.authenticated]);
 
   return (
-    <Stack>
-      {Routes.map((route) => (
-        <Stack.Screen
-          key={route.name}
-          name={route.name}
-          options={route.options}
-        />
-      ))}
-    </Stack>
+    <>
+      <StatusBar style="light" />
+      <Stack
+        screenOptions={{
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: "#1a1a1a",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        {Routes.map((route) => (
+          <Stack.Screen
+            key={route.name}
+            name={route.name}
+            options={route.options}
+          />
+        ))}
+      </Stack>
+    </>
   );
 }
 

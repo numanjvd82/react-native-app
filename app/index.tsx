@@ -16,13 +16,13 @@ const Index = () => {
               Enjoy your favorite music
             </Text>
             <Link href="/auth/sign-up" asChild>
-              <TouchableOpacity className="bg-green-500 rounded-full py-3 mb-4 items-center">
+              <TouchableOpacity className="bg-primary rounded-full py-3 mb-4 items-center">
                 <Text className="text-white font-bold">Get started</Text>
               </TouchableOpacity>
             </Link>
             <Link href="/auth/sign-in" asChild>
-              <TouchableOpacity className="border-2 border-green-500 rounded-full py-3 items-center">
-                <Text className="text-green-500 font-bold">
+              <TouchableOpacity className="border-2 border-primary rounded-full py-3 items-center">
+                <Text className="text-primary font-bold">
                   Continue with Email
                 </Text>
               </TouchableOpacity>

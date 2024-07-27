@@ -61,7 +61,7 @@ function SignIn() {
         <View className="mt-4">
           <TouchableOpacity
             onPress={handleLogin}
-            className="bg-green-500 p-2 rounded-lg"
+            className="bg-primary p-2 rounded-lg"
           >
             <Text className="text-white text-center">Sign In</Text>
           </TouchableOpacity>
@@ -70,7 +70,7 @@ function SignIn() {
         <Text className="text-gray-600 text-center mt-4 ">
           Don't have an account?
           <Link href="auth/sign-up">
-            <Text className="text-green-500 pl-1">Create One</Text>
+            <Text className="text-primary pl-1">Create One</Text>
           </Link>
         </Text>
       </View>

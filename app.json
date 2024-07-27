@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Aora",
-    "slug": "aora",
-    "scheme": "aora",
+    "name": "Pakify",
+    "slug": "pakify",
+    "scheme": "pakify",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/images/splash.jpg",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {

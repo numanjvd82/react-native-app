@@ -61,7 +61,7 @@ function SignUp() {
         <View className="mt-4">
           <TouchableOpacity
             onPress={handleSubmit}
-            className="bg-green-500 p-2 rounded-lg"
+            className="bg-primary p-2 rounded-lg"
           >
             <Text className="text-white text-center">Sign Up</Text>
           </TouchableOpacity>
@@ -70,7 +70,7 @@ function SignUp() {
         <Text className="text-gray-600 text-center mt-4 ">
           Already have an account?
           <Link href="auth/sign-in">
-            <Text className="text-green-500 pl-1">Sign In</Text>
+            <Text className="text-primary pl-1">Sign In</Text>
           </Link>
         </Text>
       </View>
