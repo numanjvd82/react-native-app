@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import React from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
-const App = () => {
+const Index = () => {
   return (
     <View className="flex-1 justify-center items-center bg-gray-900">
       <View className="rounded-lg overflow-hidden shadow-lg">
@@ -37,4 +37,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Index;

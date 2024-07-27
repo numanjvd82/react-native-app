@@ -28,8 +28,8 @@ function SignUp() {
   };
 
   return (
-    <View className="flex-1  justify-center items-center bg-gray-900">
-      <View className="bg-black bg-opacity-50 p-4 rounded-lg">
+    <View className="flex-1 p-4 justify-center items-center bg-gray-900">
+      <View className="bg-black w-full bg-opacity-50 p-4 rounded-lg">
         <Text className="text-white text-2xl font-bold text-center">
           Sign Up
         </Text>
@@ -43,7 +43,6 @@ function SignUp() {
           <TextInput
             style={{ color: "white" }}
             className="border-b border-gray-400"
-            placeholder="Email"
             value={email}
             onChangeText={(email) => setEmail(email)}
           />
@@ -53,7 +52,6 @@ function SignUp() {
           <TextInput
             className="border-b border-gray-400"
             style={{ color: "white" }}
-            placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={(password) => setPassword(password)}
