@@ -1,15 +1,8 @@
 import { FontAwesome6 } from "@expo/vector-icons";
-import React, { useState } from "react";
-import {
-  FlatList,
-  Image,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Text,
-  View,
-} from "react-native";
+import React from "react";
+import { Animated, Image, Text, View } from "react-native";
 import { detailedData } from "../config/constants";
-import { SongImageRef, SongListHeader } from "./SongsListHeader";
+import { SongListHeader } from "./SongsListHeader";
 
 type SongProps = (typeof detailedData)[number]["songs"][number];
 type SongListProps = (typeof detailedData)[number];
@@ -38,29 +31,21 @@ function Song({ id, image, name, singers }: SongProps) {
 }
 
 export default function SongsList({ list }: { list: SongListProps }) {
-  const [previousOffsetY, setPreviousOffsetY] = useState(0);
-  const ref = React.useRef<SongImageRef>(null);
-
-  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { y } = e.nativeEvent.contentOffset;
-    if (y > previousOffsetY) {
-      ref.current?.decreaseOpacityandScale();
-    } else if (y < previousOffsetY) {
-      ref.current?.increaseOpacityandScale();
-    }
-
-    setPreviousOffsetY(y);
-  };
+  const scrollY = React.useRef(new Animated.Value(0)).current;
 
   return (
-    <FlatList
+    <Animated.FlatList
       data={list.songs}
       renderItem={({ item }) => <Song {...item} />}
       keyExtractor={(item) => item.id.toString()}
       showsVerticalScrollIndicator={false}
-      ListHeaderComponent={() => <SongListHeader {...list} ref={ref} />}
+      ListHeaderComponent={() => <SongListHeader {...list} scrollY={scrollY} />}
       ListHeaderComponentStyle={{ marginBottom: 20 }}
-      onScroll={handleScroll}
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+        { useNativeDriver: true }
+      )}
+      scrollEventThrottle={16}
     />
   );
 }
