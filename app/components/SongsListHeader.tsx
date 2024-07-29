@@ -1,12 +1,17 @@
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
-import { Animated, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import Animated, {
+  interpolate,
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import { detailedData } from "../config/constants";
 import { secondsToHms } from "../config/utils";
 import RoundedIconButton from "./RoundedIconButton";
 
 type SongListHeaderProps = Omit<(typeof detailedData)[number], "songs"> & {
-  scrollY: Animated.Value;
+  scrollY: SharedValue<number>;
 };
 
 export const SongListHeader = ({
@@ -16,16 +21,10 @@ export const SongListHeader = ({
   singers,
   scrollY,
 }: SongListHeaderProps) => {
-  const scale = scrollY.interpolate({
-    inputRange: [0, 150],
-    outputRange: [1, 0.7],
-    extrapolate: "clamp",
-  });
-
-  const opacity = scrollY.interpolate({
-    inputRange: [0, 150],
-    outputRange: [1, 0.2],
-    extrapolate: "clamp",
+  const animationStyle = useAnimatedStyle(() => {
+    const scale = interpolate(scrollY.value, [0, 100], [1, 0.6]);
+    const opacity = interpolate(scrollY.value, [0, 100], [1, 0.5]);
+    return { transform: [{ scale }], opacity };
   });
 
   return (
@@ -34,12 +33,13 @@ export const SongListHeader = ({
         <Animated.Image
           borderRadius={2}
           source={image}
-          style={{
-            width: 288,
-            height: 288,
-            transform: [{ scale }],
-            opacity,
-          }}
+          style={[
+            {
+              width: 288,
+              height: 288,
+            },
+            animationStyle,
+          ]}
         />
       </View>
       <View className="mt-4 pl-2">

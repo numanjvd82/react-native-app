@@ -1,6 +1,7 @@
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
-import { Animated, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import Animated, { useSharedValue } from "react-native-reanimated";
 import { detailedData } from "../config/constants";
 import { SongListHeader } from "./SongsListHeader";
 
@@ -31,7 +32,7 @@ function Song({ id, image, name, singers }: SongProps) {
 }
 
 export default function SongsList({ list }: { list: SongListProps }) {
-  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const scrollY = useSharedValue(0);
 
   return (
     <Animated.FlatList
@@ -41,10 +42,9 @@ export default function SongsList({ list }: { list: SongListProps }) {
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => <SongListHeader {...list} scrollY={scrollY} />}
       ListHeaderComponentStyle={{ marginBottom: 20 }}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-        { useNativeDriver: true }
-      )}
+      onScroll={(e) => {
+        scrollY.value = e.nativeEvent.contentOffset.y;
+      }}
       scrollEventThrottle={16}
     />
   );
