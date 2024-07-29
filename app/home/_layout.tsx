@@ -101,6 +101,12 @@ export default function HomeLayout() {
             ),
           }}
         />
+        <Tabs.Screen
+          name="[id]"
+          options={{
+            href: null,
+          }}
+        />
       </Tabs>
     </>
   );
